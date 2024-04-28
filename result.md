@@ -1,5 +1,5 @@
 
-docker build -t docker_go . 
+docker build -t docker_go .   
 . - текущая директория
 -t - флаг для указания имени образа 
 
