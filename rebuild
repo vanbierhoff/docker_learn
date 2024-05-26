@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo $1
+docker compose build web
+
+if [ $? -eq 0 ]; then
+  echo "Web container is a build"
+else 
+  echo FAIL
+  exit 1
+fi
+
+docker compose build api
+
+if [ $? -eq 0 ]; then
+  echo "Api container is a build"
+else 
+  echo FAIL
+  exit 1
+fi
+
+if [[ -n "$1" && $1 = "up" ]]; then
+  docker compose up
+fi
+
+if [ $? -eq 0 ]; then
+  echo OK
+elif [[ -n "$1" && $1 = "up" ]]; then
+  echo OK: Docker compose is stopped
+else
+  echo FAIL
+fi
